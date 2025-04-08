@@ -32,7 +32,12 @@ http://XXX.XXX.XXX.XX:5000
 
 This is limited to running if both devices are on the same wifi network
 
-#### H ow  do you remove files?
+#### How  do you remove files?
 
 Delete them on the host device, it  should be located in the  "uploads" folder
 
+
+
+## Todo
+add qr code generator to share link
+image deletion button
