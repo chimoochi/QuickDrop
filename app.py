@@ -47,8 +47,7 @@ def download_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
-hostname = socket.gethostname()
-local_ip = socket.gethostbyname(hostname)
+local_ip = socket.gethostbyname(socket.gethostname())
 port = 5000
 def print_server_info():
     time.sleep(2) 
@@ -58,4 +57,4 @@ def print_server_info():
     print(f"http://{local_ip}:{port}")
 threading.Thread(target=print_server_info).start()
 
-app.run(host='0.0.0.0', port=port, debug=False)
+app.run(host="0.0.0.0", port=port, debug=False)
