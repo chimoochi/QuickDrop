@@ -8,7 +8,7 @@
 Clone the project, run this in cmd
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/chimoochi/file-sharing-over-LAN.git
 ```
 
 Go to the project directory
