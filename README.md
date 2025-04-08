@@ -5,7 +5,7 @@
 
 ## Run 
 
-Clone the project
+Clone the project, run this in cmd
 
 ```bash
   git clone https://link-to-project
@@ -13,24 +13,18 @@ Clone the project
 
 Go to the project directory
 
-Run  
-```
-    install-requirments.bat
-```
+Run  install-requirments.bat
 
 
 
-Start the server
+Start the server app.py
 
-```
-  app.py
-```
 
-Go to the link generated in the cli on whatever ddevice you want on the same  network.
-```
+Go to the link generated in the cli on whatever device you want on the same network. Heres an example:
+
 Link to share:
 http://XXX.XXX.XXX.XX:5000
-```
+
 
 ## FAQ
 
