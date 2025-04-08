@@ -26,18 +26,6 @@ def upload_file():
         file.seek(0, os.SEEK_END)
         file_size = file.tell()
         file.seek(0)
-        
-        class ProgressFileWrapper:
-            def __init__(self, file, size):
-                self.file = file
-                self.size = size
-                self.progress = 0
-
-            def read(self, size):
-                data = self.file.read(size)
-                self.progress += len(data)
-                return data
-
         wrapped_file = ProgressFileWrapper(file, file_size)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
         return redirect(url_for('index'))
