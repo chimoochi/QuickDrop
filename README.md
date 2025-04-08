@@ -38,6 +38,4 @@ Delete them on the host device, it  should be located in the  "uploads" folder
 
 
 
-## Todo
-add qr code generator to share link </br>
-image deletion button
+
