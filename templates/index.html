@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple File Sharing</title>
+</head>
+<body>
+    <h1>File Sharing App</h1>
+    
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
+    <h2>Available Files:</h2>
+    <ul>
+        {% for file in files %}
+            <li><a href="{{ url_for('download_file', filename=file) }}">{{ file }}</a></li>
+        {% endfor %}
+    </ul>
+    
+    <div class="progress" style="display: none;">
+        <div class="progress-bar" role="progressbar" style="width: 0%">0%</div>
+    </div>
+    <script>
+    document.querySelector('form').onsubmit = function(e) {
+        const progressDiv = document.querySelector('.progress');
+        const progressBar = document.querySelector('.progress-bar');
+        const fileInput = document.querySelector('input[type="file"]');
+        
+        if (fileInput.files.length > 0) {
+            progressDiv.style.display = 'block';
+            
+            const xhr = new XMLHttpRequest();
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            
+            xhr.upload.onprogress = function(e) {
+                if (e.lengthComputable) {
+                    const percentComplete = (e.loaded / e.total) * 100;
+                    progressBar.style.width = percentComplete + '%';
+                    progressBar.textContent = Math.round(percentComplete) + '%';
+                }
+            };
+            
+            xhr.onload = function() {
+                window.location.href = '/';
+            };
+            
+            xhr.open('POST', '/upload', true);
+            xhr.send(formData);
+            
+            e.preventDefault();
+        }
+    };
+    </script>
+</body>
+</html>
