@@ -26,6 +26,11 @@ Start the server
   app.py
 ```
 
+Go to the link generated in the cli on whatever ddevice you want on the same  network.
+```
+Link to share:
+http://XXX.XXX.XXX.XX:5000
+```
 
 ## FAQ
 
