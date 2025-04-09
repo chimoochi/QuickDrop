@@ -1,4 +1,7 @@
 
+# About
+This application is for quickly sharing files amongst other users or other devices over the same network. Usefull for sharing photos and videos with friends and family. Could also be used for transfering files between devices.
+
 # instructions
 
 
