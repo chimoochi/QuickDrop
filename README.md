@@ -17,10 +17,7 @@ Run  install-requirments.bat
 Start the server app.py
 
 
-Go to the link generated in the cli on whatever device you want on the same network. Heres an example:
-
-Link to share:
-http://XXX.XXX.XXX.XX:5000
+Go to the link generated in the terminal, or scan the qr code generated to go to the site.
 
 
 ## FAQ
