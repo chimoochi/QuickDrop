@@ -5,17 +5,11 @@
 
 ## Run 
 
-Clone the project, run this in cmd
+download projet as zip
 
-```bash
-  git clone https://github.com/chimoochi/file-sharing-over-LAN.git
-```
-
-Go to the project directory
+Unzip the project
 
 Run  install-requirments.bat
-
-
 
 Start the server app.py
 
