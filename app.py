@@ -62,7 +62,7 @@ def show_image(image_path):
 import tkinter as tk
 from PIL import Image, ImageTk
 import time
-
+import os
 def show():
     root = tk.Tk()
     root.title("file sharing over LAN")
@@ -78,7 +78,7 @@ def show():
     instructions.pack(pady=(0, 10))
     
     # Display QR code
-    img = Image.open("{image_path}")
+    img = Image.open(r"{image_path}")
     tk_img = ImageTk.PhotoImage(img)
     label = tk.Label(content_frame, image=tk_img)
     label.pack()
@@ -91,11 +91,12 @@ def show():
         root.lift()
         root.after_idle(root.attributes, '-topmost', True)
         root.after_idle(root.attributes, '-topmost', False)
-
+    if os.path.exists(r"{image_path}"):
+        os.remove(r"{image_path}")
     root.after_idle(root.attributes, '-topmost', False)
     
     root.mainloop()
-
+    
 
 show()
 """
@@ -120,14 +121,11 @@ local_ip = get_local_ip() #socket.gethostbyname(socket.gethostname())
 
 
 def print_server_info():
-    time.sleep(2) 
-    for i in range(5):
-        print("\n")
     print(f"\nLink to share:")
     print(f"http://{local_ip}:{port}")
     img = qrcode.make(f"http://{local_ip}:{port}")
-    img.save("some_file.png")
-    show_image(os.path.join(os.path.dirname(os.path.abspath(__file__)), "some_file.png"))
+    img.save("qrcode.png")
+    show_image(os.path.join(os.path.dirname(os.path.abspath(__file__)), "qrcode.png"))
 
 threading.Thread(target=print_server_info).start()
 
