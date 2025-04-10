@@ -8,19 +8,24 @@ import qrcode
 import math
 import subprocess
 import sys
+import random
+import string
 
-#TODO: password protection
+
 port = 5003
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
+temppassword = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(5))
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 @app.route('/')
 def index():
-
+    password = request.args.get('password', '')
+    if password != temppassword:
+        return "Invalid password", 403
     files = [f for f in os.listdir(app.config['UPLOAD_FOLDER']) if f != '.DS_Store']
     return render_template('index.html', files=files)
 
@@ -34,7 +39,6 @@ def upload_file():
         return redirect(request.url)
     if file:
         file.seek(0, os.SEEK_END)
-        file_size = file.tell()
         file.seek(0)
         
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
@@ -122,8 +126,8 @@ local_ip = get_local_ip() #socket.gethostbyname(socket.gethostname())
 
 def print_server_info():
     print(f"\nLink to share:")
-    print(f"http://{local_ip}:{port}")
-    img = qrcode.make(f"http://{local_ip}:{port}")
+    print(f"http://{local_ip}:{port}?password={temppassword}")
+    img = qrcode.make(f"http://{local_ip}:{port}?password={temppassword}")
     img.save("qrcode.png")
     show_image(os.path.join(os.path.dirname(os.path.abspath(__file__)), "qrcode.png"))
 
