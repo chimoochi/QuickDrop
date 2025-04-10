@@ -42,7 +42,7 @@ def upload_file():
         file.seek(0)
         
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-        return redirect(url_for('index'))
+        return redirect(f"/?password={temppassword}")
 
 @app.route('/download/<filename>')
 def download_file(filename):
@@ -50,13 +50,11 @@ def download_file(filename):
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
     return "File not found", 404
 
-@app.route('/delete/<filename>')
-def delete_file(filename):
-    
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    if os.path.exists(file_path):
-        os.remove(file_path)
-    return redirect(url_for('index'))
+@app.route('/preview/<filename>')
+def preview_file(filename):
+    if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
+        return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+    return "File not found", 404
 
 def show_image(image_path):
     # Create a separate process for the Tkinter window
