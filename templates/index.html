@@ -231,8 +231,8 @@
                         {{ file }}
                     </div>
                     <div class="file-actions">
-                        <a href="{{ url_for('download_file', filename=file) }}" class="action-button download-button">Download</a>
-                        <a href="/preview/{{ file }}" class="action-button preview-button" target="_blank">Preview</a>
+                        <a href="{{ url_for('download_file', filename=file) }}?password={{ request.args.get('password', '') }}" class="action-button download-button">Download</a>
+                        <a href="/preview/{{ file }}?password={{ request.args.get('password', '') }}" class="action-button preview-button" target="_blank">Preview</a>
                     </div>
                 </li>
             {% endfor %}
@@ -248,6 +248,13 @@
         const progressBar = document.querySelector('.progress-bar');
         const progressText = document.querySelector('.progress-text');
         const form = document.querySelector('form');
+        
+        // Get password from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const password = urlParams.get('password') || '';
+        
+        // Update form action to include password
+        form.action = `/upload?password=${password}`;
         
         // Update file name display when file is selected
         fileInput.addEventListener('change', function() {
@@ -325,7 +332,7 @@
                     }
                 });
                 
-                xhr.open('POST', '/upload', true);
+                xhr.open('POST', `/upload?password=${password}`, true);
                 xhr.send(formData);
             }
         });
