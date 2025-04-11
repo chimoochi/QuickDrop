@@ -12,7 +12,7 @@ import random
 import string
 
 
-port = 5003
+port = 5012
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -32,6 +32,9 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
+    password = request.args.get('password', '')
+    if password!= temppassword:
+        return "Invalid password", 403
     if 'file' not in request.files:
         return redirect(request.url)
     file = request.files['file']
